@@ -5,16 +5,18 @@ There are two problems solved here:
 1. Given a start node ( room ) find a path to another room ( if there is any ), by avoiding the stairs.
 2. Given a start node ( room ) find a path to another room ( if there is any ), by visiting minimum number of rooms.
 
+### Prerequisites
+
+Eclipse IDE.
+
 ## Getting Started
 
 1. Open Eclipse
 2. `File/Open Projects from File system...`
 3. Select 'Archive' and find the file.
-4. Run the project by click on the green button in the top left corner.
+4. Open the main class.
+5. Run the project by click on the green button in the top left corner.
 
-### Prerequisites
-
-You will need Eclipse IDE.
 
 
 
