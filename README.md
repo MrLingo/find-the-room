@@ -16,7 +16,5 @@ There are two problems solved here:
 
 You will need Eclipse IDE.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md].
 
