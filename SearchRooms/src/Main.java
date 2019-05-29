@@ -37,6 +37,7 @@ public class Main {
 			
 			// Add nodes.
 			else if (splitResult[4].equals("room;") || splitResult[4].equals("transit;")) {
+				
 				// Save the now separated values in strings.
 				roomNumberStr = splitResult[0];
 				xStr = splitResult[1];
@@ -68,10 +69,10 @@ public class Main {
 				secondRoomInt = Integer.parseInt(secondRoomStr);			
 				costInt = Integer.parseInt(costStr);
 				
-				if( isBidirectionalStr.equals("yes;")){
+				if (isBidirectionalStr.equals("yes;")) {
 					isBidirectionalBool = true;
 				}
-				else if( isBidirectionalStr.equals("no;") ){
+				else if ( isBidirectionalStr.equals("no;")) {
 					isBidirectionalBool = false;
 				}
 				else {
@@ -88,59 +89,13 @@ public class Main {
 		input.close();
 	}
 	
-	public static void init() throws FileNotFoundException {		
-		file = new File(".\\Resources\\Data.txt");
-		parseFile(file);
-		
-		// Test code:
-		/*
-		graph.addNode(new Node(101, 15, 28, 1, "room"));
-		graph.addNode(new Node(102, 9, 6, 1, "room"));
-		graph.addNode(new Node(103, 5, 11, 1, "room"));
-		graph.addNode(new Node(206, 51, 61, 1, "transit"));
-		graph.addNode(new Node(200, 8, 7, 1, "transit"));
-		graph.addNode(new Node(201, 82, 70, 2, "room"));
-		graph.addNode(new Node(202, 67, 61, 2, "room"));
-		graph.addNode(new Node(203, 65, 50, 2, "room"));
-		graph.addNode(new Node(204, 15, 28, 2, "room"));
-		graph.addNode(new Node(205, 9, 6, 2, "room"));
-		graph.addNode(new Node(212, 70, 50, 2, "transit"));
-		graph.addNode(new Node(215, 75, 65, 2, "transit"));
-		graph.addNode(new Node(301, 75, 35, 3, "room"));
-		graph.addNode(new Node(302, 80, 20, 3, "room"));
-		graph.addNode(new Node(303, 67, 61, 3, "room"));
-		graph.addNode(new Node(304, 184, 73, 3, "room"));
-		// 16 nodes total
-		
-		graph.addLink(101, 102, "walk", 3 , true);
-		graph.addLink(101, 206, "lift", 8 , true); // Transit
-		graph.addLink(101, 103, "walk", 2 , true);
-		graph.addLink(102, 103, "walk", 1 , true);
-		graph.addLink(103, 200, "lift", 1 , true); // Transit
-		graph.addLink(200, 201, "lift", 4 , true); // Transit
-		graph.addLink(201, 202, "walk", 6 , true);
-		graph.addLink(202, 206, "lift", 2 , true); // Transit
-		graph.addLink(202, 212, "climb", 3 , true); // Transit
-		graph.addLink(202, 203, "walk", 11 , true);
-		graph.addLink(206, 205, "lift", 9 , true); // Transit
-		graph.addLink(205, 203, "walk", 4 , true);
-		
-		graph.addLink(203, 212, "climb", 5 , true); // Transit
-		graph.addLink(203, 204, "walk", 2 , true);
-		graph.addLink(205, 215, "climb", 3 , true); // Transit
-		
-		graph.addLink(204, 215, "climb", 2 , true); // Transit
-		graph.addLink(215, 304, "climb", 4 , true); // Transit
-		graph.addLink(304, 303, "walk", 1 , true);
-		
-		graph.addLink(303, 301, "walk", 7 , true);
-		graph.addLink(301, 302, "walk", 4 , true);
-		graph.addLink(301, 212, "climb", 1 , true); // Transit
-		*/
+	public static void init() throws FileNotFoundException{
+            file = new File(".\\find-the-room-master\\SearchRooms\\Resources\\Data.txt");
+	    parseFile(file);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
 		init();
-		findPath(202, 103, new MinRoomsSearch(graph));
+		findPath(202, 103, new AvoidStairsSearch(graph));
 	}
 }
