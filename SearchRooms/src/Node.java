@@ -14,11 +14,9 @@ public class Node {
 	
 	public ArrayList<Link> links = new ArrayList<>();
 	
-	
 	public Node(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
-	
 	
 	public Node(int roomNumber, int x, int y, int floorNumber, String roomType) {
 		this(roomNumber);
@@ -27,8 +25,7 @@ public class Node {
 		this.floorNumber = floorNumber;
 		this.roomType = roomType;
 	}
-
-
+	
 	public void reset() {
 		this.isExpanded = false;
 		this.isTested = false;

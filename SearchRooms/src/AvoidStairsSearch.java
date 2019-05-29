@@ -9,7 +9,6 @@ public class AvoidStairsSearch implements Searchable {
 		this.myMap = g;
 	} 
 	
-	
 	public boolean search(int startName, int endName) {
 		if( !myMap.containsNode(startName) || !myMap.containsNode(endName)){
 			return false;
@@ -60,7 +59,6 @@ public class AvoidStairsSearch implements Searchable {
 		return false;
 	}
 	
-	
 	// Check if the connection has 'climb' action.
 	public boolean avoidStairs(Node node){
 		for(Link l : node.links) {
@@ -71,7 +69,6 @@ public class AvoidStairsSearch implements Searchable {
 		return true;
 	}
 	
-	
 	public void calculateCost(Node parent, Node child) {
 		for(Link l : parent.links) {
 			if( l.toNodeName == child.roomNumber) {
@@ -81,7 +78,6 @@ public class AvoidStairsSearch implements Searchable {
 			}
 		} // for	
 	}
-	
 	
 	public void printPath(int allRooms, int transitRooms, int stdRooms) {
 		String numOfRooms = Integer.toString(allRooms);

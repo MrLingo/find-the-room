@@ -10,10 +10,8 @@ public class MinRoomsSearch implements Searchable{
 		this.myMap = g;
 	}
 
-	
 	@Override
-	public boolean search(int startName, int endName) {
-		
+	public boolean search(int startName, int endName) {	
 		if(!myMap.containsNode(startName) || !myMap.containsNode(endName)) {
 			return false;
 		}
@@ -58,7 +56,6 @@ public class MinRoomsSearch implements Searchable{
 		return (myMap.getNode(endName).parent != null);
 	}
 	
-
 	private void setParentAndCost(Node node) {	
 		Node temp;
 		int coordinatesCost;
@@ -76,11 +73,9 @@ public class MinRoomsSearch implements Searchable{
 		}
 	}
 	
-
 	public void addToPath(int room) {
 		finalPath.add(room);
 	}
-	
 	
 	public void printPath(int name) {				
 		Node node = myMap.getNode(name);
@@ -96,5 +91,4 @@ public class MinRoomsSearch implements Searchable{
 		}
 		System.out.println("\nRooms visited: " + Integer.toString(roomsVisited) + " \nDistance: " + myMap.getNode(name).distanceToGoal);	
 	}
-
 }

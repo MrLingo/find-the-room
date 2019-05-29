@@ -8,7 +8,6 @@ public class Link {
 		this.toNodeName = secondRoom;
 	}
 	
-	
 	public Link(int roomNumber, int l, String action) {
 		this.action = action;
 		this.toNodeName = roomNumber;

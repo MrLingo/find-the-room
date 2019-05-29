@@ -10,7 +10,6 @@ public class Graph {
 	Comparator<Node> byDistance = (Node n1,Node n2)
 			-> Integer.compare(n1.distanceToGoal, n2.distanceToGoal);
 	
-			
 	public void addNode(Node node) {
 		if(node == null || myGraph.containsKey(node.roomNumber)) {
 			System.err.println("Room already exists");
@@ -18,7 +17,6 @@ public class Graph {
 		}
 		myGraph.put(node.roomNumber, node);
 	}
-	
 	
 	public void addLink(int firstRoom, int secondRoom, String action, int cost, boolean isBiDirectional) {
 		if(myGraph.containsKey(firstRoom) && myGraph.containsKey(secondRoom)) {
@@ -34,16 +32,13 @@ public class Graph {
 		}
 	}
 	
-	
 	public Node getNode(int startName) {
 		return myGraph.get(startName);
 	}
 	
-	
 	public boolean containsNode(int roomNumber) {
 		return myGraph.containsKey(roomNumber);
 	}
-	
 	
 	public ArrayList<Node> getLinkedNodes(int roomNumber){
 		ArrayList<Node> linkedNodes = new ArrayList<>();
@@ -54,16 +49,13 @@ public class Graph {
 		return linkedNodes;
 	}
 
-	
     public void sortByDistance(ArrayList<Node> list) {	
 		list.sort(byDistance);
 	}
 	
-    
 	public void resetAllNodes() {
 		myGraph.forEach((k,v) -> v.reset());
 	}
-	
 	
 	public boolean checkFloor(Node room1, Node room2) {
 		if( !room2.roomType.equals("transit") && room1.floorNumber != room2.floorNumber){
@@ -81,5 +73,4 @@ public class Graph {
 				+ Math.pow(nodeOne.y - nodeTwo.y, 2));
 		return distance;
 	}
-	
 }

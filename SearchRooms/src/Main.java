@@ -17,7 +17,6 @@ public class Main {
 		}
 	}
 	
-	
 	// Take the input from the file.
 	public static void parseFile(File file) throws FileNotFoundException {
 		String[] splitResult;
@@ -88,7 +87,6 @@ public class Main {
 		input.close();
 	}
 	
-	
 	public static void init() throws FileNotFoundException {		
 		file = new File(".\\Resources\\Data.txt");
 		parseFile(file);
@@ -140,7 +138,6 @@ public class Main {
 		*/
 	}
 
-	
 	public static void main(String[] args) throws FileNotFoundException {
 		init();
 		findPath(202, 103, new MinRoomsSearch(graph));
