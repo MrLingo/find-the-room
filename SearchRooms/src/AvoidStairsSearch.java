@@ -1,7 +1,7 @@
 import java.util.Stack;
 
 public class AvoidStairsSearch implements Searchable {
-	Graph myMap;
+    Graph myMap;
 	int totalCost;
 	int numberOfRoomsVisited = 0, transitRooms = 0, standardRooms = 0;
 	
@@ -10,18 +10,17 @@ public class AvoidStairsSearch implements Searchable {
 	} 
 	
 	public boolean search(int startName, int endName) {
-		if( !myMap.containsNode(startName) || !myMap.containsNode(endName)){
+		if (!myMap.containsNode(startName) || !myMap.containsNode(endName)) {
 			return false;
 		}
 		
 		// 'Catch' the start node name and create a stack structure.
 		Node startNode = myMap.getNode(startName);
-		Stack<Node> stack = new Stack<Node>();
+		Stack<Node> stack = new Stack<Node>();	
+		Node temp;
 		stack.push(startNode);
 		
-		Node temp;
-		
-		while(!stack.isEmpty()) {
+		while (!stack.isEmpty()) {
 			temp = stack.pop();
 			System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")" );
 			if( temp.roomType.equals("transit") ) {
@@ -30,19 +29,18 @@ public class AvoidStairsSearch implements Searchable {
 			else{
 				standardRooms++;
 			}
-			
 			numberOfRoomsVisited++;
 			
-			if(temp.roomNumber == endName) {
+			if (temp.roomNumber == endName) {
 				printPath(numberOfRoomsVisited, transitRooms, standardRooms);
 				return true;
 			}
 			
 			temp.isTested = true;
 			
-			for(Node node : myMap.getLinkedNodes(temp.roomNumber)) {
-				if(!node.isTested && !stack.contains(node) && myMap.checkFloor(temp, node)) {		
-					if(avoidStairs(node)) {
+			for (Node node : myMap.getLinkedNodes(temp.roomNumber)) {
+				if (!node.isTested && !stack.contains(node) && myMap.checkFloor(temp, node)) {		
+					if (avoidStairs(node)) {
 						node.parent = temp;
 						stack.push(node);
 						calculateCost(node.parent, node);	
@@ -62,7 +60,7 @@ public class AvoidStairsSearch implements Searchable {
 	// Check if the connection has 'climb' action.
 	public boolean avoidStairs(Node node){
 		for(Link l : node.links) {
-		    if( l.action.equals("climb") ){
+		    if (l.action.equals("climb")) {
 		    	return false;
 		    }
 		} // end for
@@ -70,8 +68,8 @@ public class AvoidStairsSearch implements Searchable {
 	}
 	
 	public void calculateCost(Node parent, Node child) {
-		for(Link l : parent.links) {
-			if( l.toNodeName == child.roomNumber) {
+		for (Link l : parent.links) {
+			if (l.toNodeName == child.roomNumber) {
 				System.out.println(l.length);
 				totalCost += l.length;
 				break;	

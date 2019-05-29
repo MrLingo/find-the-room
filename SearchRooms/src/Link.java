@@ -1,5 +1,4 @@
 public class Link {
-	
 	public int toNodeName;
 	public int length;
 	public String action;

@@ -7,10 +7,9 @@ public class Main {
 	static Scanner input;
 	static Graph graph = new Graph();
 	
-	
 	public static void findPath(int startName, int endName, Searchable searcher) {
 		graph.resetAllNodes();
-		if(searcher.search(startName, endName)) {
+		if (searcher.search(startName, endName)) {
 			System.out.println("There is a path!");
 		}else  {
 			System.out.println("No such path found!");
@@ -28,15 +27,16 @@ public class Main {
 		boolean isBidirectionalBool = true;
 		
 		input = new Scanner(file);
-		while(input.hasNext()) {
+		while (input.hasNext()) {
 			String nextLine = input.nextLine();
 			splitResult = nextLine.split(",");
 			
-			if( nextLine.isEmpty()) {
+			if(nextLine.isEmpty()) {
 				continue;
 			}	
+			
 			// Add nodes.
-			else if(splitResult[4].equals("room;") || splitResult[4].equals("transit;")){
+			else if (splitResult[4].equals("room;") || splitResult[4].equals("transit;")) {
 				// Save the now separated values in strings.
 				roomNumberStr = splitResult[0];
 				xStr = splitResult[1];
@@ -52,12 +52,12 @@ public class Main {
 				
 				// Cutting the ; of roomType string.
 				roomTypeStr = roomTypeStr.substring(0, roomTypeStr.length() - 1);
-								
-				graph.addNode(new Node(roomNumberInt, xInt, yInt, floorInt, roomTypeStr));	
 				
+				graph.addNode(new Node(roomNumberInt, xInt, yInt, floorInt, roomTypeStr));				
 			}
+			
 			// Add transitions.
-			else if(splitResult[4].equals("yes;") || splitResult[4].equals("no;")) {
+			else if (splitResult[4].equals("yes;") || splitResult[4].equals("no;")) {
 				firstRoomStr = splitResult[0];
 				secondRoomStr = splitResult[1];
 				transitionType = splitResult[2];
@@ -82,7 +82,8 @@ public class Main {
 				
 			}else {
 			    System.out.println("Wrong line parameters!");
-			}		    
+			}		
+			
 		} // end while
 		input.close();
 	}
