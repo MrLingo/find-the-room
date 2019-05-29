@@ -5,7 +5,7 @@ There are two problems solved here:
 1. Given a start node ( room ) find a path to another room ( if there is any ), by avoiding the stairs.
 2. Given a start node ( room ) find a path to another room ( if there is any ), by visiting minimum number of rooms.
 
-### Prerequisites
+## Prerequisites
 
 Eclipse IDE.
 
