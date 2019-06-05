@@ -1,9 +1,11 @@
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class AvoidStairsSearch implements Searchable {
     Graph myMap;
 	int totalCost;
 	int numberOfRoomsVisited = 0, transitRooms = 0, standardRooms = 0;
+	long runTime = System.currentTimeMillis();
+	long endIt = runTime + 2; // 2 milliseconds
 	
 	public AvoidStairsSearch(Graph g) {
 		this.myMap = g;
@@ -16,13 +18,20 @@ public class AvoidStairsSearch implements Searchable {
 		
 		// 'Catch' the start node name and create a stack structure.
 		Node startNode = myMap.getNode(startName);
-		Stack<Node> stack = new Stack<Node>();	
+		ArrayList<Node> queue = new ArrayList<>();;	
 		Node temp;
-		stack.push(startNode);
+		queue.add(startNode);
 		
-		while (!stack.isEmpty()) {
-			temp = stack.pop();
-			System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")" );
+		while (!queue.isEmpty()) {
+			temp = queue.get(0);
+			
+			if (temp.parent != null) {
+				System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")");
+			}
+			else {
+				System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")");	
+				}
+			
 			if( temp.roomType.equals("transit") ) {
 				transitRooms++;
 			}
@@ -32,28 +41,33 @@ public class AvoidStairsSearch implements Searchable {
 			numberOfRoomsVisited++;
 			
 			if (temp.roomNumber == endName) {
-				printPath(numberOfRoomsVisited, transitRooms, standardRooms);
+				printPath(endName);
 				return true;
+			}
+			
+			// If the algorithm continues forever stop it by counting the milliseconds of it's runtime.
+			else if(System.currentTimeMillis() > endIt) {
+				return false;
 			}
 			
 			temp.isTested = true;
 			
 			for (Node node : myMap.getLinkedNodes(temp.roomNumber)) {
-				if (!node.isTested && !stack.contains(node) && myMap.checkFloor(temp, node)) {		
-					if (avoidStairs(node)) {
-						node.parent = temp;
-						stack.push(node);
-						calculateCost(node.parent, node);	
-					}
-					else {
-						continue;
-					}
+				if (!node.isTested && !queue.contains(node)) {	
+						for (Link l : temp.links) {
+							if (l.action.equals("walk") || l.action.equals("lift")) {
+								Node nodeToAdd = myMap.getNode(l.toNodeName);
+								queue.add(nodeToAdd);						
+							    node.parent = temp;    		    
+							}
+						} // end inner for				
+									
 				} // end if
+				
 			} // end for
-			
+			queue.remove(0);
 			temp.isExpanded = true;
-		} //end while
-			
+		} //end while		
 		return false;
 	}
 	
@@ -70,19 +84,23 @@ public class AvoidStairsSearch implements Searchable {
 	public void calculateCost(Node parent, Node child) {
 		for (Link l : parent.links) {
 			if (l.toNodeName == child.roomNumber) {
-				System.out.println(l.length);
-				totalCost += l.length;
 				break;	
 			}
 		} // for	
 	}
 	
-	public void printPath(int allRooms, int transitRooms, int stdRooms) {
-		String numOfRooms = Integer.toString(allRooms);
-		String transit = Integer.toString(transitRooms);
-		String standard = Integer.toString(stdRooms);
-		System.out.println("\nNumber of rooms visited: " + numOfRooms + "\n" + 
-		"Transit rooms: " + transit + "\n"+ 
-		"Standard rooms: " + standard + " \nTotal cost of: " + totalCost);
+	public void printPath(int name) {		
+		int numOfConnections;
+		Node node = myMap.getNode(name);
+		ArrayList<String> path = new ArrayList<>();
+		do {
+			path.add(Integer.toString(node.roomNumber));
+			node = node.parent;
+		} while (node != null);
+		
+		numOfConnections = path.size() - 1;
+		totalCost = numOfConnections * 2;
+		
+		System.out.println("\nRooms visited: " + Integer.toString(numberOfRoomsVisited) + "\nTransit Rooms: " + transitRooms + "\nStandardRooms: " + standardRooms + "\nCost: " + totalCost);	
 		}
 }

@@ -5,6 +5,9 @@ import java.util.HashMap;
 public class Graph {
 	public HashMap<Integer, Node> myGraph = new HashMap<>();
 
+	Comparator<Node> byFloor = (Node n1,Node n2)
+			-> Integer.compare(n1.floorNumber, n2.floorNumber);
+	
 	Comparator<Node> byDistance = (Node n1,Node n2)
 			-> Integer.compare(n1.distanceToGoal, n2.distanceToGoal);
 	
