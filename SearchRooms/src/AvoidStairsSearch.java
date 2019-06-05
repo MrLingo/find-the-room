@@ -25,12 +25,7 @@ public class AvoidStairsSearch implements Searchable {
 		while (!queue.isEmpty()) {
 			temp = queue.get(0);
 			
-			if (temp.parent != null) {
-				System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")");
-			}
-			else {
-				System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")");	
-				}
+			System.out.println("Temp node is: " + temp.roomNumber + " (" + temp.roomType + ")");
 			
 			if( temp.roomType.equals("transit") ) {
 				transitRooms++;
@@ -101,6 +96,6 @@ public class AvoidStairsSearch implements Searchable {
 		numOfConnections = path.size() - 1;
 		totalCost = numOfConnections * 2;
 		
-		System.out.println("\nRooms visited: " + Integer.toString(numberOfRoomsVisited) + "\nTransit Rooms: " + transitRooms + "\nStandardRooms: " + standardRooms + "\nCost: " + totalCost);	
+		System.out.println("\nRooms visited: " + Integer.toString(numberOfRoomsVisited) + "\nTransit Rooms: " + transitRooms + "\nStandardRooms: " + standardRooms);	
 		}
 }

@@ -7,6 +7,7 @@ public class MinRoomsSearch implements Searchable{
 	int roomsVisited = 0;
 	int totalCost;
 	int transitRooms = 0, standardRooms = 0;
+	String parent;
 	
 	public MinRoomsSearch(Graph g) {
 		this.myMap = g;
@@ -37,15 +38,18 @@ public class MinRoomsSearch implements Searchable{
 				standardRooms++;
 			}
 			
-			if (temp.parent != null) {
-			System.out.println("\nTemp node is: " + temp.roomNumber
-					+ " , parent " + temp.parent.roomNumber
-					+ " , distance " + temp.distanceToGoal);
+			// If the parent is Null, the case is different.
+			if (temp.parent == null) {
+                parent = "None";
 			}
 			else {
-				System.out.println("\nTemp node is: " + temp.roomNumber
-			     	+ " , distance " + temp.distanceToGoal);	
+				parent = Integer.toString(temp.parent.roomNumber);
 			}
+
+					
+			System.out.println("Temp node is: " + temp.roomNumber
+					+ " , parent " + parent
+					+ " , distance " + temp.distanceToGoal);
 			
 			if (temp.roomNumber == endName) {
 				printPath(endName);

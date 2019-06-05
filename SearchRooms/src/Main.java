@@ -10,9 +10,9 @@ public class Main {
 	public static void findPath(int startName, int endName, Searchable searcher) {
 		graph.resetAllNodes();
 		if (searcher.search(startName, endName)) {
-			System.out.println("There is a path!");
+			System.out.println("There is a path!\n");
 		}else  {
-			System.out.println("No such path found!");
+			System.out.println("No such path found!\n");
 		}
 	}
 	
@@ -116,6 +116,11 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		init();
+		
+		System.out.println(" ========AVOID STAIRS ======== \n");
 		findPath(100, 304, new AvoidStairsSearch(graph));
+		
+		System.out.println(" ======== MIN ROOMS ======== \n");
+		findPath(100, 304, new MinRoomsSearch(graph));
 	}
 }
