@@ -7,7 +7,7 @@ There are two problems solved here:
 
 ## Prerequisites
 
-Eclipse IDE
+Eclipse IDE  
 Java 8
 
 ## Getting Started
